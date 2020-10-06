@@ -62,6 +62,8 @@ Example using python interactive session.
     mypantilt = PanTilt()
     mypantilt.help()
 
+ctrl-d to exit
+
 ```
 Implementation Example
 
