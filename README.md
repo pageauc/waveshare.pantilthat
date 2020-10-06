@@ -2,12 +2,12 @@
 #### WaveShare pan tilt hat python library class and demo for Raspberry Pi
 
 I bought the waveshare pan tilt hat for a Raspberry Pi project I was working on.
-Assembly was a little tricky but with the help of a [YouTube video](https://www.youtube.com/watch?v=4A7tJ0QH4L4) I got it together.
-The [Vendor instructions]( https://www.waveshare.com/pan-tilt-hat.htm) and 
-[GitHub Repo](https://github.com/waveshare/Pan-Tilt-HAT) were sketchy and the I felt the python library was lacking.
+I found Assembly tricky but with the help of a [YouTube video](https://www.youtube.com/watch?v=4A7tJ0QH4L4) I got it together.
+I felt the [vendor instructions]( https://www.waveshare.com/pan-tilt-hat.htm) and 
+[GitHub Repo](https://github.com/waveshare/Pan-Tilt-HAT) were lacking, especially the python library.
 I wrote my own python library that is similar to the Pimoroni pan tilt hat operation that uses -90 to +90 values for the pan and tilt
-positions. I also have several Pimoroni pan tilt hats. Below is the driver help instructions.
-I also wrote a comprehensive demo python script.
+positions. I also have several Pimoroni pan tilt hats and found support was much better and trouble free. 
+Below is the driver help instructions. I also wrote a comprehensive demo python script.
 
 ## Quick Install
 
