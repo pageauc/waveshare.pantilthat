@@ -27,7 +27,13 @@ Raspberry PI configuration whiptail menu per instructions below
     
 Select ***5 Interfacing Options*** menu pick         
 Then select ***P5 I2C*** menu pick and Enable automatic loading of I2C kernel module
-    
+ 
+Reboot and run the example pantilt hat demo python script.
+
+    cd ~/waveshare
+    python ./test-pantilt.py
+
+## pantilthat.py help() 
 ```
 Implementation Example
 
