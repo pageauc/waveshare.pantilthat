@@ -4,19 +4,26 @@
 I bought the waveshare pan tilt hat for a Raspberry Pi project I was working on.
 Assembly was a little tricky but with the help of a [YouTube video](https://www.youtube.com/watch?v=4A7tJ0QH4L4) I got it together.
 The [Vendor instructions]( https://www.waveshare.com/pan-tilt-hat.htm) and 
-[GitHub Repo](https://github.com/waveshare/Pan-Tilt-HAT)were sketchy and the I felt the python library was lacking.
-I wrote my own python library that is similar to the Pimoroni pantilthat operation that uses -90 to +90 values for the pan and tilt
-positions since I also have several Pimoroni pan tilt hats. Below is the driver help instructions.
+[GitHub Repo](https://github.com/waveshare/Pan-Tilt-HAT) were sketchy and the I felt the python library was lacking.
+I wrote my own python library that is similar to the Pimoroni pan tilt hat operation that uses -90 to +90 values for the pan and tilt
+positions. I also have several Pimoroni pan tilt hats. Below is the driver help instructions.
 I also wrote a comprehensive demo python script.
 
 ## Quick Install
 
-Not Implemented yet
+Will Implemented curl install script shortly.
   
  
-## Driver Help 
+## pantilthat.py Help
+ 
 pantilthat.py Driver for waveshare pan tilt hat hardware.
 This driver uses BCM2835 For Details See http://www.airspayce.com/mikem/bcm2835/
+You also need to enable I2C using
+
+    sudo raspi-config
+    
+Then select Interfaces menu pick, then enable using menu pick P5 I2C Enable/Disable automatic loading of I2C kernel module
+    
 
 Implementation Example
 
