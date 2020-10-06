@@ -45,7 +45,7 @@ Reboot and run the example ***test-pantilt.py*** demo python script per.
 
 Press ctrl-c to exit script.  
 
-Review test-pantilt.py code for implementation details. Code is python2 and python3 compatile.    
+Review test-pantilt.py code for implementation details. Code is python2 and python3 compatible.    
 Make a copy and try changing code to learn details of managing pantilt software control.
 
     cd ~/waveshare
@@ -53,6 +53,15 @@ Make a copy and try changing code to learn details of managing pantilt software 
     nano test-myproject.py
 
 ### pantilthat.py help() 
+Below is a copy of the pantilthat.py help() function output.       
+Example using python interactive session.
+
+    cd ~/waveshare
+    python
+    from pantilthat import PanTilt
+    mypantilt = PanTilt()
+    mypantilt.help()
+
 ```
 Implementation Example
 
