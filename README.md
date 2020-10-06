@@ -10,6 +10,8 @@ I wrote my own python library that is similar to the Pimoroni pan tilt hat opera
 positioning. I also have several Pimoroni pan tilt hats and found support was much better and trouble free. 
 Hope this can help you with your own projects.  
 
+Instruction assume you are comfortable with SSH and/or Terminal operation and Raspberry Pi OS commands.
+
 ## Quick Install
 
 NOTE: Do a Raspberry Pi OS ***sudo apt-get update*** and ***sudo apt-get upgrade*** before curl install.
@@ -43,8 +45,12 @@ Reboot and run the example ***test-pantilt.py*** demo python script per.
 
 Press ctrl-c to exit script.  
 
-Review test-pantilt.py code for implementation details. Make a copy and try changing code
-to learn details of managing pantilt software control.
+Review test-pantilt.py code for implementation details. Code is python2 and python3 compatile.    
+Make a copy and try changing code to learn details of managing pantilt software control.
+
+    cd ~/waveshare
+    cp test-pantilt.py test-myproject.py
+    nano test-myproject.py
 
 ### pantilthat.py help() 
 ```
