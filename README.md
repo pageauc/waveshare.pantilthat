@@ -24,7 +24,7 @@ You also need to enable I2C using
     
 Then select Interfaces menu pick, and enable using menu pick ***P5 I2C Enable/Disable automatic loading of I2C kernel module***
     
-`
+```
 Implementation Example
 
    from pantilthat import PanTilt # import library
@@ -42,4 +42,5 @@ Other Options
    cam.stop()              # Turn Off pwm to both servo channels
    cam.start()             # Turn On pwm to both servo channels after stop
    cam.help()              # Display this help message
-`
+
+```
