@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ver="0.5"
+ver="0.6
 
 INSTALL_DIR='waveshare'  # Default folder install location
 
@@ -31,12 +31,12 @@ else
 fi
 
 for fname in "${installFiles[@]}" ; do
-    wget_output=$(wget -O $fname -q --show-progress https://raw.github.com/pageauc/waveshare.pantilthat/master/$fname)
+    wget_output=$(wget -O $fname -q --show-progress https://raw.githubusercontent.com/pageauc/waveshare.pantilthat/main/$fname)
     if [ $? -ne 0 ]; then
         if [ $? -ne 0 ]; then
             echo "ERROR - $fname wget Download Failed. Possible Cause Internet Problem."
         else
-            wget -O $fname https://raw.github.com/pageauc/waveshare.pantilthat/master/$fname
+            wget -O $fname https://raw.githubusercontent.com/pageauc/waveshare.pantilthat/main/$fname
         fi
     fi
 done
