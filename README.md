@@ -16,13 +16,12 @@ Will Implemented curl install script shortly.
  
 ## Instructions
  
-the ***pantilthat.py*** file is the python class library for waveshare pan tilt hat hardware.
-This driver uses BCM2835. For Details See http://www.airspayce.com/mikem/bcm2835/
-
+The ***pantilthat.py*** file is the python class library for waveshare pan tilt hat hardware.
+This driver uses BCM2835 and I2C. For Details See http://www.airspayce.com/mikem/bcm2835/
 
 You also need to ***enable I2C***    
 From a Logged in SSH or Terminal session on the Raspbery Pi. Run the
-Raspberry PI configuration whiptail menu per instructions below
+Raspberry PI configuration whiptail menu per command below
 
     sudo raspi-config
     
