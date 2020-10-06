@@ -16,7 +16,7 @@ IMPORTANT - It is suggested you do a Raspbian sudo apt-get update and sudo apt-g
 Step 1 With mouse left button highlight curl command in code box below. Right click mouse in highlighted area and Copy.
 Step 2 On RPI putty SSH or terminal session right click, select paste then Enter to download and run script.
 
-    curl -L https://raw.githubusercontent.com/pageauc/waveshare.pantilt/master/install.sh | bash
+    curl -L https://raw.githubusercontent.com/pageauc/waveshare.pantilthat/master/install.sh | bash
 
 This will create a /home/pi/waveshare folder and required files for testing the waveshare pantilt hardware
   
