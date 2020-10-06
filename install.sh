@@ -72,7 +72,7 @@ echo "
 -----------------------------------------------
 $STATUS Complete
 -----------------------------------------------
-INSTRUCTIONS (Assumes you are comfortable with SSH and/or Terminal session commands)
+INSTRUCTIONS Assumes you are comfortable with SSH and/or Terminal session commands
 
 1. Ensure picamera module is enabled, connected and working.
 2. Ensure waveshare pantilt hardware is assembled and connected to the Raspberry Pi
