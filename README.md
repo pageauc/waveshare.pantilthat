@@ -14,7 +14,7 @@ Below is the driver help instructions. I also wrote a comprehensive demo python 
 Will Implemented curl install script shortly.
   
  
-## pantilthat.py Help
+## Instructions
  
 pantilthat.py Driver for waveshare pan tilt hat hardware.
 This driver uses BCM2835 For Details See http://www.airspayce.com/mikem/bcm2835/
@@ -28,12 +28,16 @@ Raspberry PI configuration whiptail menu per instructions below
 Select ***5 Interfacing Options*** menu pick         
 Then select ***P5 I2C*** menu pick and Enable automatic loading of I2C kernel module
  
-Reboot and run the example pantilt hat demo python script.
+Reboot and run the example ***test-pantilt.py*** demo python script.
 
+    sudo apt install python-picamera
+    
     cd ~/waveshare
     python ./test-pantilt.py
 
-## pantilthat.py help() 
+Press ctrl-c to exit script
+
+### pantilthat.py help() 
 ```
 Implementation Example
 
