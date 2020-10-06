@@ -18,12 +18,15 @@ Will Implemented curl install script shortly.
  
 pantilthat.py Driver for waveshare pan tilt hat hardware.
 This driver uses BCM2835 For Details See http://www.airspayce.com/mikem/bcm2835/
-You also need to enable I2C using
+You also need to ***enable I2C***
+
+From a Logged in SSH or Terminal session on the Raspbery Pi. Run the
+Raspberry PI configuration whiptail menu per instructions below
 
     sudo raspi-config
     
 Select ***5 Interfacing Options*** menu pick         
-Then select ***P5 I2C*** menu pick to Enable/Disable automatic loading of I2C kernel module
+Then select ***P5 I2C*** menu pick and Enable automatic loading of I2C kernel module
     
 ```
 Implementation Example
