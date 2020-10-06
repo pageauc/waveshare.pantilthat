@@ -1,17 +1,18 @@
 # waveshare.pantilthat
 #### WaveShare pan tilt hat python library class and demo for Raspberry Pi
 
-I bought the waveshare pan tilt hat for a Raspberry Pi project I was working on.
+I [bought](https://www.amazon.com/waveshare-Pan-Tilt-Raspberry-Onboard-Intensity/dp/B07Q5W6P3N/ref=sr_1_1?dchild=1&keywords=waveshare+pan+tilt&qid=1601992264&sr=8-1) 
+the waveshare pan tilt hat for a Raspberry Pi project I was working on.
 I found Assembly tricky but with the help of a [YouTube video](https://www.youtube.com/watch?v=4A7tJ0QH4L4) I got it together.
-I felt the [vendor instructions]( https://www.waveshare.com/pan-tilt-hat.htm) and 
-[GitHub Repo](https://github.com/waveshare/Pan-Tilt-HAT) were lacking, especially the python library.
-I wrote my own python library that is similar to the Pimoroni pan tilt hat operation that uses -90 to +90 values for the pan and tilt
-positions. I also have several Pimoroni pan tilt hats and found support was much better and trouble free. 
-Below is the driver help instructions. I also wrote a comprehensive demo python script.
+I felt the [vendor instructions](https://www.waveshare.com/pan-tilt-hat.htm) and 
+[GitHub Repo](https://github.com/waveshare/Pan-Tilt-HAT) were lacking, especially the python class library and sample code.
+I wrote my own python library that is similar to the Pimoroni pan tilt hat operation that uses -90 to +90 values for pan and tilt
+positioning. I also have several Pimoroni pan tilt hats and found support was much better and trouble free. 
+Hope this can help you with your own projects.  
 
 ## Quick Install
 
-IMPORTANT - It is suggested you do a Raspberry Pi OS ***sudo apt-get update*** and ***sudo apt-get upgrade*** before curl install.
+NOTE: Do a Raspberry Pi OS ***sudo apt-get update*** and ***sudo apt-get upgrade*** before curl install.
 
 Step 1 With mouse left button, highlight curl command below. Right click mouse in highlighted area and Copy.    
 Step 2 On RPI putty SSH or terminal session right click, select paste then Enter to download and run script.
@@ -31,17 +32,19 @@ Raspberry PI configuration whiptail menu per command below
 
     sudo raspi-config
     
-Select ***5 Interfacing Options*** menu pick         
-Then select ***P5 I2C*** menu pick and Enable automatic loading of I2C kernel module
+Select ***5 Interfacing Options*** menu pick            
+Select ***P5 I2C*** and Enable automatic loading of I2C kernel module    
+Select ***Pi Camera*** and Enable connection to Pi Camera   
  
-Reboot and run the example ***test-pantilt.py*** demo python script.
+Reboot and run the example ***test-pantilt.py*** demo python script per.
 
-    sudo apt install python-picamera
-    
     cd ~/waveshare
     python ./test-pantilt.py
 
-Press ctrl-c to exit script
+Press ctrl-c to exit script.  
+
+Review test-pantilt.py code for implementation details. Make a copy and try changing code
+to learn details of managing pantilt software control.
 
 ### pantilthat.py help() 
 ```
