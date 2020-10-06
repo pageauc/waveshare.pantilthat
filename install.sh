@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ver="0.6
+ver="0.6"
 
 INSTALL_DIR='waveshare'  # Default folder install location
 
