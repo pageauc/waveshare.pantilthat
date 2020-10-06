@@ -14,9 +14,14 @@ except ImportError:
     print('sudo apt-get install python3-picamera')
     sys.exit(1)
 
-from pantilthat import PanTilt
+try:
+    # Try to import from /usr/local/lib/python2.7/dist-packages or python3.7/dist-packages
+    from waveshare.pantilthat import PanTilt
+except ImportError:
+    # import from a local pantilthat.py in same folder as this script.
+    from pantilthat import PanTilt
 
-prog_ver = '0.7'
+prog_ver = '0.8'
 prog_name = os.path.basename(__file__)
 print('-------------------------------------------------')
 print('%s ver %s  written by Claude Pageau' % (prog_name, prog_ver))
@@ -45,11 +50,8 @@ cam.flip_servo = False  # Optionally flips pan and tilt in case servo plugin is 
 cam.debug = False
 cam.setPWMFreq(50)  # Optional pwm frequency setting
 cam.setServoPulse(1, 500)  # Optional pwm servo pulse setting
-cam.pan(0)
-cam.tilt(20)
-print('pantilthat.py version is %s' % cam.__version__())
-cam.help()
-time.sleep(5)
+cam.pan(0)  # center pan
+cam.tilt(20) # center tilt slightly higher
 
 #----------------------------------------
 def center(pan=0, tilt=0):
@@ -126,6 +128,8 @@ try:
 
 except KeyboardInterrupt:
   center(0, 20)
+  print('pantilthat.py version is %s' % cam.__version__())
+  cam.help()
   cam.stop()
   print('\n%s ver %s User Exited with Keyboard ctrl-c' % (prog_name, prog_ver))
   sys.exit()

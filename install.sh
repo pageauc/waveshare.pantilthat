@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ver="0.6"
+ver="0.8"
 
 INSTALL_DIR='waveshare'  # Default folder install location
 
@@ -41,8 +41,13 @@ for fname in "${installFiles[@]}" ; do
     fi
 done
 
-echo "$STATUS Make required Files Executable"
-chmod +x *.py
+# create python library module folders for python2 and python3
+sudo mkdir /usr/local/lib/python2.7/dist-packages/waveshare
+sudo cp pantilthat.py /usr/local/lib/python2.7/dist-packages/waveshare
+sudo touch /usr/local/lib/python2.7/dist-packages/waveshare/__init__.py
+sudo mkdir /usr/local/lib/python3.7/dist-packages/waveshare
+sudo cp pantilthat.py /usr/local/lib/python3.7/dist-packages/waveshare
+sudo touch /usr/local/lib/python3.7/dist-packages/waveshare/__init__.py
 
 echo "$STATUS Install Dependencies"
 sudo apt-get -yq install python-rpi.gpio
@@ -55,7 +60,7 @@ cd ~
 echo "$0 Install bcm2835-1.$bcm_ver  Please wait ..."
 echo "$0 Downloading http://www.airspayce.com/mikem/bcm2835/bcm2835-1.$bcm_ver.tar.gz"
 wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.$bcm_ver.tar.gz
-tar -zxvf bcm2835-1.$bcm_ver.tar.gz 
+tar -zxvf bcm2835-1.$bcm_ver.tar.gz
 cd bcm2835-1.$bcm_ver
 sudo ./configure
 echo "$0 Compiling ..... One Moment Please"
@@ -81,7 +86,7 @@ INSTRUCTIONS Assumes you are comfortable with SSH and/or Terminal session comman
     sudo raspi-config
 
 Using whiptail menu select Interfacing then I2C and Enable.
-Also ensure the picamera module is Enabled.    
+Also ensure the picamera module is Enabled.
 
 Run demo per the following commands
 

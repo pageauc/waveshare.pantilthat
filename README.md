@@ -59,6 +59,8 @@ Example using python interactive session.
     cd ~/waveshare
     python
     from pantilthat import PanTilt
+    or
+    from waveshare.pantilthat import PanTilt   # Load from python library dist-packages
     mypantilt = PanTilt()
     mypantilt.help()
 
