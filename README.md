@@ -29,7 +29,7 @@ Implementation Example
 
    from pantilthat import PanTilt # import library
    cam = PanTilt()                # Initialize pantilt servo library
-   cam.setPWMFreq(50)             # Optional pwm frequency setting
+   cam.setPWMFreq(50)             # Default=50 Optional pwm frequency setting
    cam.setServoPulse(1, 500)      # Optional pwm servo pulse setting
    cam.pan(0)                     # valid values -90 to +90 Move cam horizontally to center position
    cam.tilt(20)                   # valid values -90 to +90 Move cam vertically to slightly above center
@@ -37,8 +37,8 @@ Implementation Example
 Other Options
 
    cam.__version__()       # Display version Number
-   cam.debug = True        # Display additional servo information messages
-   cam.flip_servo = False  # Optionally flips pan and tilt in case servo plugin is different
+   cam.debug = False       # True= Display additional servo information messages
+   cam.flip_servo = False  # True= Optionally flips pan and tilt in case servo plugin is different
    cam.stop()              # Turn Off pwm to both servo channels
    cam.start()             # Turn On pwm to both servo channels after stop
    cam.help()              # Display this help message
