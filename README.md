@@ -22,7 +22,8 @@ You also need to enable I2C using
 
     sudo raspi-config
     
-Then select Interfaces menu pick, and enable using menu pick ***P5 I2C Enable/Disable automatic loading of I2C kernel module***
+Select ***5 Interfacing Options*** menu pick         
+Then select ***P5 I2C*** menu pick to Enable/Disable automatic loading of I2C kernel module
     
 ```
 Implementation Example
