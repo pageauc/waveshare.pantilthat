@@ -73,7 +73,7 @@ try:
   with picamera.PiCamera() as camera:
       camera.resolution = CAMERA_RESOLUTION
       camera.hflip = CAMERA_HFLIP
-      camera.vflip = CAMERA_VLIP
+      camera.vflip = CAMERA_VFLIP
       time.sleep(CAMERA_WARMUP_SEC) # Allow time for camera to warm up
       image_seq = 1  # image numbering for a full cam stop sequence
       while True:
