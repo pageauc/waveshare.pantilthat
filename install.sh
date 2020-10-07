@@ -41,6 +41,8 @@ for fname in "${installFiles[@]}" ; do
     fi
 done
 
+chmod +x *py
+
 # create python library module folders for python2 and python3
 sudo mkdir -p /usr/local/lib/python2.7/dist-packages/waveshare
 sudo cp pantilthat.py /usr/local/lib/python2.7/dist-packages/waveshare
