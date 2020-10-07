@@ -16,8 +16,8 @@ Instruction assume you are comfortable with SSH and/or Terminal operation and Ra
 
 NOTE: Do a Raspberry Pi OS ***sudo apt-get update*** and ***sudo apt-get upgrade*** before curl install.
 
-Step 1 With mouse left button, highlight curl command below. Right click mouse in highlighted area and Copy.    
-Step 2 On RPI putty SSH or terminal session right click, select paste then Enter to download and run script.
+***Step 1*** With mouse left button, highlight curl command below. Right click mouse in highlighted area and Copy.    
+***Step 2*** On RPI putty SSH or terminal session right click, select paste then Enter to download and run script.
 
     curl -L https://raw.githubusercontent.com/pageauc/waveshare.pantilthat/main/install.sh | bash
 
@@ -35,8 +35,13 @@ Raspberry PI configuration whiptail menu per command below
     sudo raspi-config
     
 Select ***5 Interfacing Options*** menu pick            
-Select ***P5 I2C*** and Enable automatic loading of I2C kernel module    
+Select ***P5 I2C*** and Enable automatic loading of I2C kernel module
+
+If you have a Pi camera module installed        
 Select ***Pi Camera*** and Enable connection to Pi Camera   
+
+***NOTE:*** The test-pantilt.py demo defaults to CAMERA_ON = False
+To enable use of a Pi Camera edit test-pantilt.py and set variable CAMERA_ON = True
  
 Reboot and run the example ***test-pantilt.py*** demo python script per.
 
