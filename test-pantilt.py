@@ -6,7 +6,7 @@ import os
 import sys
 import RPi.GPIO as GPIO
 
-PROG_VER = '0.95'
+PROG_VER = '0.96'
 PROG_NAME = os.path.basename(__file__)
 
 # Pi Camera Settings
@@ -29,6 +29,13 @@ IMAGE_DIR = './images'
 # Servo Settings
 SERVO_SLEEP_SEC = 0.1  # Allow time for servo to move
 SERVO_SPEED = 2  # degree increment for speed of pan/tilt smooth moves
+SERVO_PAN_CENTER = 0
+SERVO_PAN_MIN = -90
+SERVO_PAN_MAX = 90
+SERVO_TILT_CENTER = 20  # point slightly higher Adjust to your needs
+SERVO_TILT_MIN = -90
+SERVO_TILT_MAX = 90
+
 
 if CAMERA_ON:
     try:
@@ -51,13 +58,13 @@ except ImportError:
 cam = PanTilt()  # Initialize pantilt servo library
 cam.flip_servo = False  # Optionally flips pan and tilt in case servo plugin is different
 cam.debug = False
-cam.setPWMFreq(50)  # Optional pwm frequency setting
-cam.setServoPulse(1, 500)  # Optional pwm servo pulse setting
-cam.pan(0)  # center pan
-cam.tilt(20) # center tilt slightly higher
+# cam.setPWMFreq(50)  # Optional pwm frequency setting
+# cam.setServoPulse(1, 500)  # Optional pwm servo pulse setting
+cam.pan(SERVO_PAN_CENTER)   # center pan
+cam.tilt(SERVO_TILT_CENTER) # center tilt pointing slightly higher
 
 #----------------------------------------
-def center(pan=0, tilt=0):
+def center(pan=SERVO_PAN_CENTER, tilt=SERVO_TILT_CENTER):
     cam.pan(pan)
     time.sleep(SERVO_SLEEP_SEC)
     cam.tilt(tilt)
@@ -66,14 +73,15 @@ def center(pan=0, tilt=0):
 #----------------------------------------
 def run_demo():
     image_seq = 1  # image numbering for a full cam stop sequence
+    print('----- Begin Demo -----')
     while True:
         print('center cam at pan=0 tilt=20')
-        center(0, 20)
-        print("Pan Max Left cam.pan(-90)")
-        cam.pan(-90)
+        center(SERVO_PAN_CENTER, SERVO_TILT_CENTER)
+        print("Pan Max Left cam.pan(%i)" % SERVO_PAN_MIN)
+        cam.pan(SERVO_PAN_MIN)
         time.sleep(2)
-        print("Pan Max Right cam.pan(90)")
-        cam.pan(90)
+        print("Pan Max Right cam.pan(%i)" % SERVO_PAN_MAX)
+        cam.pan(SERVO_PAN_MAX)
         time.sleep(2)
 
         img_num = 0  # image number within a cam stop sequence
@@ -102,32 +110,32 @@ def run_demo():
         image_seq += 1
 
         print('Smooth Pan Right speed = %i' % SERVO_SPEED)
-        for i in range(-90, 90, SERVO_SPEED):
-            cam.pan(i)
+        for pan_pos in range(SERVO_PAN_MIN, SERVO_PAN_MAX, SERVO_SPEED):
+            cam.pan(pan_pos)
             time.sleep(SERVO_SLEEP_SEC)
 
         print('Smooth Pan Left speed = %i' % SERVO_SPEED)
-        for i in range(90, -90, -SERVO_SPEED):
-            cam.pan(i)
+        for pan_pos in range(SERVO_PAN_MAX, SERVO_PAN_MIN, -SERVO_SPEED):
+            cam.pan(pan_pos)
             time.sleep(SERVO_SLEEP_SEC)
 
-        center(0, 20)
-        print("Tilt Max Down cam.tilt(-90)")
-        cam.tilt(-90)
+        center(SERVO_PAN_CENTER, SERVO_TILT_CENTER)
+        print("Tilt Max Down cam.tilt(%i)" % SERVO_TILT_MIN)
+        cam.tilt(SERVO_TILT_MIN)
         time.sleep(2)
-        print("Tilt Max Up cam.tilt(90)")
-        cam.tilt(90)
+        print("Tilt Max Up cam.tilt(%i)" % SERVO_TILT_MAX)
+        cam.tilt(SERVO_TILT_MAX)
         time.sleep(2)
 
         print('Smooth Pan Down speed = %i' % SERVO_SPEED)
-        for i in range(90, -90, -SERVO_SPEED):
-            cam.tilt(i)
+        for tilt_pos in range(SERVO_TILT_MAX, SERVO_TILT_MIN, -SERVO_SPEED):
+            cam.tilt(tilt_pos)
             time.sleep(SERVO_SLEEP_SEC)
         print('Smooth Pan Up speed = %i' % SERVO_SPEED)
-        for i in range(-90, 90, SERVO_SPEED):
-            cam.tilt(i)
+        for tilt_pos in range(SERVO_TILT_MIN, SERVO_TILT_MAX, SERVO_SPEED):
+            cam.tilt(tilt_pos)
             time.sleep(SERVO_SLEEP_SEC)
-        center(0, 20)
+        center(SERVO_PAN_CENTER, SERVO_TILT_CENTER)
 
         print('Press ctrl-c to exit demo')
         time.sleep(5)
@@ -136,7 +144,6 @@ print('-------------------------------------------------')
 print('%s ver %s  written by Claude Pageau' % (PROG_NAME, PROG_VER))
 print('-------------------------------------------------')
 print("This is a WaveShare pantilt assembly Demo.")
-
 try:
     if CAMERA_ON:
         # Create image directory if required
@@ -144,6 +151,7 @@ try:
             print('Create IMAGE_DIR %s' % IMAGE_DIR)
             os.makedirs(IMAGE_DIR)
 
+        print('Initializing PiCamera ....')
         with picamera.PiCamera() as camera:
             camera.resolution = CAMERA_RESOLUTION
             camera.hflip = CAMERA_HFLIP
@@ -154,9 +162,10 @@ try:
         run_demo()
 
 except KeyboardInterrupt:
-  center(0, 20)
-  print('pantilthat.py version is %s' % cam.__version__())
-  cam.help()
-  cam.stop()
-  print('\n%s ver %s User Exited with Keyboard ctrl-c' % (PROG_NAME, PROG_VER))
-  sys.exit()
+    print('')
+    print('----- End Demo -----')
+    center(SERVO_PAN_CENTER, SERVO_TILT_CENTER)
+    print('\n%s ver %s User Exited with Keyboard ctrl-c\n' % (PROG_NAME, PROG_VER))
+    cam.help()
+    cam.stop()
+    sys.exit()
