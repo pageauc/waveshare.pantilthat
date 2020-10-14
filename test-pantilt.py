@@ -15,12 +15,12 @@ CAMERA_RESOLUTION = (1280, 720)
 CAMERA_HFLIP = True
 CAMERA_VFLIP = True
 CAMERA_WARMUP_SEC = 2
-CAMERA_STOPS = [(90, 20),
-                (54, 20),
-                (18, 20),
-                (-18, 20),
-                (-54, 20),
-                (-90, 20)]
+CAMERA_STOPS = [(90, -20),
+                (54, -20),
+                (18, -20),
+                (-18, -20),
+                (-54, -20),
+                (-90, -20)]
 
 # Image Settings
 IMAGE_PREFIX = 'image-'
