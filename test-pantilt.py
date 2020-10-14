@@ -15,12 +15,12 @@ CAMERA_RESOLUTION = (1280, 720)
 CAMERA_HFLIP = True
 CAMERA_VFLIP = True
 CAMERA_WARMUP_SEC = 2
-CAMERA_STOPS = [(90, -20),
-                (54, -20),
-                (18, -20),
-                (-18, -20),
-                (-54, -20),
-                (-90, -20)]
+CAMERA_STOPS = [(90, -10),
+                (54, -10),
+                (18, -10),
+                (-18, -10),
+                (-54, -10),
+                (-90, -10)]
 
 # Image Settings
 IMAGE_PREFIX = 'image-'
@@ -32,7 +32,7 @@ SERVO_SPEED = 2  # degree increment for speed of pan/tilt smooth moves
 SERVO_PAN_CENTER = 0
 SERVO_PAN_MIN = -90
 SERVO_PAN_MAX = 90
-SERVO_TILT_CENTER = 20  # point slightly higher Adjust to your needs
+SERVO_TILT_CENTER = -10  # point slightly higher Adjust to your needs
 SERVO_TILT_MIN = -90
 SERVO_TILT_MAX = 90
 
@@ -120,19 +120,19 @@ def run_demo():
             time.sleep(SERVO_SLEEP_SEC)
 
         center(SERVO_PAN_CENTER, SERVO_TILT_CENTER)
-        print("Tilt Max Down cam.tilt(%i)" % SERVO_TILT_MIN)
-        cam.tilt(SERVO_TILT_MIN)
-        time.sleep(2)
-        print("Tilt Max Up cam.tilt(%i)" % SERVO_TILT_MAX)
+        print("Tilt Max Down cam.tilt(%i)" % SERVO_TILT_MAX)
         cam.tilt(SERVO_TILT_MAX)
+        time.sleep(2)
+        print("Tilt Max Up cam.tilt(%i)" % SERVO_TILT_MIN)
+        cam.tilt(SERVO_TILT_MIN)
         time.sleep(2)
 
         print('Smooth Pan Down speed = %i' % SERVO_SPEED)
-        for tilt_pos in range(SERVO_TILT_MAX, SERVO_TILT_MIN, -SERVO_SPEED):
+        for tilt_pos in range(SERVO_TILT_MIN, SERVO_TILT_MAX, SERVO_SPEED):
             cam.tilt(tilt_pos)
             time.sleep(SERVO_SLEEP_SEC)
         print('Smooth Pan Up speed = %i' % SERVO_SPEED)
-        for tilt_pos in range(SERVO_TILT_MIN, SERVO_TILT_MAX, SERVO_SPEED):
+        for tilt_pos in range(SERVO_TILT_MAX, SERVO_TILT_MIN, -SERVO_SPEED):
             cam.tilt(tilt_pos)
             time.sleep(SERVO_SLEEP_SEC)
         center(SERVO_PAN_CENTER, SERVO_TILT_CENTER)
