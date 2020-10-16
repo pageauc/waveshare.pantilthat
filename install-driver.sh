@@ -49,6 +49,7 @@ Using whiptail menu select Interfacing then I2C and Enable.
 Optionally you can Enable Pi Camera module support.
 
 Example python script to center pantilthat.
+Valid pan and tilt values are between -90 to +90 degrees
 
     #!/usr/bin/env python
     import time
@@ -60,6 +61,7 @@ Example python script to center pantilthat.
     pantilthat.tilt(0)
     time.sleep(0.1)
     pantilthat.stop()
+    time.sleep(2) # Allow time for driver to stop
     print('pantilthat at pan=0, tilt=0')
     print('Bye ...')
 
