@@ -50,6 +50,7 @@ sudo touch /usr/local/lib/python2.7/dist-packages/waveshare/__init__.py
 sudo mkdir -p /usr/local/lib/python3.7/dist-packages/waveshare
 sudo cp pantilthat.py /usr/local/lib/python3.7/dist-packages/waveshare
 sudo touch /usr/local/lib/python3.7/dist-packages/waveshare/__init__.py
+rm pantilthat.py
 
 echo "$STATUS Install Dependencies"
 sudo apt-get -yq install python-rpi.gpio

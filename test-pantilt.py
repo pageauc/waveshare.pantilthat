@@ -9,6 +9,8 @@ import RPi.GPIO as GPIO
 PROG_VER = '0.96'
 PROG_NAME = os.path.basename(__file__)
 
+PANTILT_IS_PIMORONI = False  # Set to True to Test with Pimoroni pantilthat
+
 # Pi Camera Settings
 CAMERA_ON = False  # True= Use Picamera  False= Do Not use PiCamera or Not Installed
 CAMERA_RESOLUTION = (1280, 720)
@@ -47,12 +49,23 @@ if CAMERA_ON:
         print('sudo apt-get install python3-picamera')
         sys.exit(1)
 
-try:
-    # Try to import from /usr/local/lib/python2.7/dist-packages or python3.7/dist-packages
-    from waveshare.pantilthat import PanTilt
-except ImportError:
-    # import from a local pantilthat.py in same folder as this script.
-    from pantilthat import PanTilt
+if PANTILT_IS_PIMORONI:
+    try:
+        import pantilthat
+    except ImportError:
+        print(Import Error. Install Pimoroni pantilthat python library per')
+        print('   sudo apt install python-pantilthat')
+        print('   sudo apt install python3-pantilthat') 
+        sys.exit()
+else:        
+    try:
+        # Try to import from /usr/local/lib/python2.7/dist-packages or python3.7/dist-packages
+        from waveshare.pantilthat import PanTilt
+    except ImportError:
+        # import from a local pantilthat.py in same folder as this script.
+        print('Import error.  Install Waveshare drivers via curl script Reboot and retry test')
+        print('curl -L https://raw.githubusercontent.com/pageauc/waveshare.pantilthat/main/install-driver.sh | bash')
+        sys.exit()
 
 # Setup pantilt
 cam = PanTilt()  # Initialize pantilt servo library
