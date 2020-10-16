@@ -22,6 +22,15 @@ if PANTILT_IS_PIMORONI:
         print('ERROR : Import Pimoroni PanTiltHat Python Library per')
         print('        sudo apt install pantilthat')
         sys.exit()
+    try:
+        pantilthat.pan(PAN_HOME)
+    except IOError:
+        print('ERROR: pantilthat hardware problem')
+        print('nano edit this script, change variable and retry per')
+        print('    nano -l sinwave-dance.py')
+        print('Change value of variable per below. ctrl-x y to save and exit')
+        print('    PANTILT_IS_PIMORONI = False')
+        sys.exit()
     pantilt_is = 'Pimoroni'
 else:
     try:
@@ -30,8 +39,17 @@ else:
     except ImportError:
         print('ERROR : Install Waveshare PanTiltHat Python Library per')
         print('        curl -L https://raw.githubusercontent.com/pageauc/waveshare.pantilthat/main/install.sh | bash')
-        sys.exit
-    pantilthat = PanTilt()
+        sys.exit()
+    try:
+        pantilthat = PanTilt()
+        pantilthat.pan(PAN_HOME)
+    except IOError:
+        print('ERROR: pantilthat hardware problem')
+        print('nano edit this script, change variable below and retry per')
+        print('    nano -l sinwave-dance.py')
+        print('Change value of variable per below. ctrl-x y to save and exit')
+        print('    PANTILT_IS_PIMORONI = True')
+        sys.exit()
     pantilt_is = 'Waveshare'
 
 def dance():
@@ -62,8 +80,7 @@ try:
 except KeyboardInterrupt:
     pantilthat.pan(PAN_HOME)
     pantilthat.tilt(TILT_HOME)
-    time.sleep(0.1)  # Short delay to move servos
-    pantilthat.stop() # Turn off PWM to servos
+    time.sleep(2)  # Delay to move servos
     print('\nUser Pressed ctrl-c')
     print('Position of PanTilt is (%i, %i)' % (PAN_HOME, TILT_HOME))
     print('End %s PanTiltHat SinWave Dance' % pantilt_is)
