@@ -23,6 +23,12 @@ NOTE: Do a Raspberry Pi OS ***sudo apt-get update*** and ***sudo apt-get upgrade
 
 This will create a /home/pi/waveshare folder and required files for testing the waveshare pantilt hardware
  
+Install Waveshare pantilthat python library and pwm driver Only
+
+    curl -L https://raw.githubusercontent.com/pageauc/waveshare.pantilthat/main/install-driver.sh | bash 
+    
+See script instructions for Details    
+ 
 ## Instructions
  
 The ***pantilthat.py*** file is the python class library for waveshare pan tilt hat hardware.
@@ -50,6 +56,11 @@ Reboot and run the example ***test-pantilt.py*** demo python script per.
 
 Press ctrl-c to exit script.  
 
+Get the pantilthat to dance. Adapted from the Pimoroni pantilthat Github repo example smooth.py    
+Note Code is compatible with Pimoroni and Waveshare pantilthats under python2 or python3.
+
+    python ./sinwave-dance.py   
+
 Review test-pantilt.py code for implementation details. Code is python2 and python3 compatible.    
 Make a copy and try changing code to learn details of managing pantilt software control.
 
@@ -63,8 +74,6 @@ Example using python interactive session.
 
     cd ~/waveshare
     python
-    from pantilthat import PanTilt
-    or
     from waveshare.pantilthat import PanTilt   # Load from python library dist-packages
     mypantilt = PanTilt()
     mypantilt.help()

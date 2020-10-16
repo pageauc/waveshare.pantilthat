@@ -25,9 +25,9 @@ echo "$STATUS panosend-install.sh ver $ver"
 echo "-----------------------------------------------"
 echo "$STATUS Download GitHub Files"
 if $is_upgrade ; then
-    installFiles=("pantilthat.py" "test-pantilt.py")
+    installFiles=("pantilthat.py" "test-pantilt.py" "sinwave-dance.py")
 else
-    installFiles=("pantilthat.py" "test-pantilt.py")
+    installFiles=("pantilthat.py" "test-pantilt.py" "sinwave-dance.py")
 fi
 
 for fname in "${installFiles[@]}" ; do
@@ -90,10 +90,13 @@ INSTRUCTIONS Assumes you are comfortable with SSH and/or Terminal session comman
 Using whiptail menu select Interfacing then I2C and Enable.
 Also ensure the picamera module is Enabled.
 
+4. Reboot RPI
+
 Run demo per the following commands
 
     cd ~/waveshare
     ./test-pantilt.py
+    ./sinwave-dance.py
 
 Good Luck Claude ...
 Bye"
