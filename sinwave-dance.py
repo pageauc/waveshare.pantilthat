@@ -1,8 +1,11 @@
 #!/usr/bin/python
 '''
 sinwave-dance.py is Adapted from the Pimoroni github smooth.py example
+https://github.com/pimoroni/pantilt-hat/tree/master/examples
 Modified by Claude Pageau to add support for Waveshare pantilthat.
-
+This script is compatible with Waveshare, Pimoroni and compatible pantilthat
+hardware running under python2 or python3
+For more details see https://github.com/pageauc/waveshare.pantilthat
 '''
 import sys
 import math
@@ -10,7 +13,7 @@ import time
 import RPi.GPIO as GPIO
 
 VERBOSE_ON = False  # Default=False True= Display Position data
-SPEED = 0.005  # Default 0.005 short Time delay for each loop 
+SPEED = 0.005  # Default 0.005 short Time delay for each loop
 PANTILT_IS_PIMORONI = False  # False= Waveshare or Compatible Pantilthat True= Pimoroni
 PAN_HOME = 0  # Center pan to a central position
 TILT_HOME = 0  # Center tilt to a central position
@@ -27,7 +30,7 @@ if PANTILT_IS_PIMORONI:
     except IOError:
         print('ERROR: pantilthat hardware problem')
         print('nano edit this script, change variable and retry per')
-        print('    nano -l sinwave-dance.py')
+        print('    nano -l pantilt-dance.py')
         print('Change value of variable per below. ctrl-x y to save and exit')
         print('    PANTILT_IS_PIMORONI = False')
         sys.exit()
@@ -46,7 +49,7 @@ else:
     except IOError:
         print('ERROR: pantilthat hardware problem')
         print('nano edit this script, change variable below and retry per')
-        print('    nano -l sinwave-dance.py')
+        print('    nano -l pantilt-dance.py')
         print('Change value of variable per below. ctrl-x y to save and exit')
         print('    PANTILT_IS_PIMORONI = True')
         sys.exit()
@@ -80,7 +83,7 @@ try:
 except KeyboardInterrupt:
     pantilthat.pan(PAN_HOME)
     pantilthat.tilt(TILT_HOME)
-    time.sleep(2)  # Delay to move servos
+    time.sleep(1)  # Short delay to move servos
     print('\nUser Pressed ctrl-c')
     print('Position of PanTilt is (%i, %i)' % (PAN_HOME, TILT_HOME))
     print('End %s PanTiltHat SinWave Dance' % pantilt_is)

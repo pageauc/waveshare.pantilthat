@@ -1,4 +1,13 @@
 #!/usr/bin/python
+'''
+test-pantilt.py written by Claude Pageau
+Run pantilthat Demo test routines. Optional PiCamera option avail.
+provide various python code examples for others to implement.
+This script is compatible with Waveshare, Pimoroni and compatible pantilthat
+hardware running under python2 or python3
+For more details see https://github.com/pageauc/waveshare.pantilthat
+'''
+
 from __future__ import print_function
 print('Loading ...')
 import time
@@ -6,10 +15,9 @@ import os
 import sys
 import RPi.GPIO as GPIO
 
-PROG_VER = '0.96'
+PROG_VER = '0.97'
 PROG_NAME = os.path.basename(__file__)
-
-PANTILT_IS_PIMORONI = False  # Set to True to Test with Pimoroni pantilthat
+PANTILT_IS_PIMORONI = False  # False= Waveshare or Compatible Pantilthat True= Pimoroni
 
 # Pi Camera Settings
 CAMERA_ON = False  # True= Use Picamera  False= Do Not use PiCamera or Not Installed
@@ -38,7 +46,6 @@ SERVO_TILT_CENTER = -10  # point slightly higher Adjust to your needs
 SERVO_TILT_MIN = -90
 SERVO_TILT_MAX = 90
 
-
 if CAMERA_ON:
     try:
         import picamera
@@ -53,51 +60,69 @@ if PANTILT_IS_PIMORONI:
     try:
         import pantilthat
     except ImportError:
-        print(Import Error. Install Pimoroni pantilthat python library per')
-        print('   sudo apt install python-pantilthat')
-        print('   sudo apt install python3-pantilthat') 
+        print('ERROR : Import Pimoroni PanTiltHat Python Library per')
+        print('        sudo apt install pantilthat')
         sys.exit()
-else:        
     try:
-        # Try to import from /usr/local/lib/python2.7/dist-packages or python3.7/dist-packages
+        pantilthat.pan(SERVO_PAN_CENTER)
+    except IOError:
+        print('ERROR: pantilthat hardware problem')
+        print('nano edit this script, change variable and retry per')
+        print('    nano -l %s' % PROG_NAME)
+        print('Change value of variable per below. ctrl-x y to save and exit')
+        print('    PANTILT_IS_PIMORONI = False')
+        sys.exit()
+    pantilt_is = 'Pimoroni'
+else:
+    try:
+        # import pantilthat
         from waveshare.pantilthat import PanTilt
     except ImportError:
-        # import from a local pantilthat.py in same folder as this script.
-        print('Import error.  Install Waveshare drivers via curl script Reboot and retry test')
-        print('curl -L https://raw.githubusercontent.com/pageauc/waveshare.pantilthat/main/install-driver.sh | bash')
+        print('ERROR : Install Waveshare PanTiltHat Python Library per')
+        print('        curl -L https://raw.githubusercontent.com/pageauc/waveshare.pantilthat/main/install.sh | bash')
         sys.exit()
+    try:
+        pantilthat = PanTilt()
+        pantilthat.pan(SERVO_PAN_CENTER)
+    except IOError:
+        print('ERROR: pantilthat hardware problem')
+        print('nano edit this script, change variable below and retry per')
+        print('    nano -l %s' % PROG_NAME)
+        print('Change value of variable per below. ctrl-x y to save and exit')
+        print('    PANTILT_IS_PIMORONI = True')
+        sys.exit()
+    pantilt_is = 'Waveshare'
 
 # Setup pantilt
-cam = PanTilt()  # Initialize pantilt servo library
-cam.flip_servo = False  # Optionally flips pan and tilt in case servo plugin is different
-cam.debug = False
-# cam.setPWMFreq(50)  # Optional pwm frequency setting
-# cam.setServoPulse(1, 500)  # Optional pwm servo pulse setting
-cam.pan(SERVO_PAN_CENTER)   # center pan
-cam.tilt(SERVO_TILT_CENTER) # center tilt pointing slightly higher
+pantilthat.flip_servo = False  # Optionally flips pan and tilt in case servo plugin is different
+pantilthat.debug = False
+# pantilthat.setPWMFreq(50)  # Optional pwm frequency setting
+# pantilthat.setServoPulse(1, 500)  # Optional pwm servo pulse setting
+pantilthat.pan(SERVO_PAN_CENTER)   # center pan
+pantilthat.tilt(SERVO_TILT_CENTER) # center tilt pointing slightly higher
 
 #----------------------------------------
 def center(pan=SERVO_PAN_CENTER, tilt=SERVO_TILT_CENTER):
-    cam.pan(pan)
+    pantilthat.pan(pan)
     time.sleep(SERVO_SLEEP_SEC)
-    cam.tilt(tilt)
+    pantilthat.tilt(tilt)
     time.sleep(SERVO_SLEEP_SEC)
 
 #----------------------------------------
 def run_demo():
-    image_seq = 1  # image numbering for a full cam stop sequence
-    print('----- Begin Demo -----')
+    image_seq = 1  # image numbering for a full pantilthat stop sequence
+    print('----- Begin %s Demo -----' % pantilt_is)
     while True:
-        print('center cam at pan=0 tilt=20')
+        print('center pantilthat at pan=0 tilt=20')
         center(SERVO_PAN_CENTER, SERVO_TILT_CENTER)
-        print("Pan Max Left cam.pan(%i)" % SERVO_PAN_MIN)
-        cam.pan(SERVO_PAN_MIN)
+        print("Pan Max Left pantilthat.pan(%i)" % SERVO_PAN_MIN)
+        pantilthat.pan(SERVO_PAN_MIN)
         time.sleep(2)
-        print("Pan Max Right cam.pan(%i)" % SERVO_PAN_MAX)
-        cam.pan(SERVO_PAN_MAX)
+        print("Pan Max Right pantilthat.pan(%i)" % SERVO_PAN_MAX)
+        pantilthat.pan(SERVO_PAN_MAX)
         time.sleep(2)
 
-        img_num = 0  # image number within a cam stop sequence
+        img_num = 0  # image number within a pantilthat stop sequence
         print('CAMERA_ON = %s' % CAMERA_ON)
         if CAMERA_ON:
             print('Take Images at Cam Stops')
@@ -110,43 +135,43 @@ def run_demo():
                                     IMAGE_PREFIX +
                                     'seq' + str(image_seq) +
                                     '-' + str(img_num) + '.jpg')
-            cam.tilt(tilt_stop)
+            pantilthat.tilt(tilt_stop)
             time.sleep(SERVO_SLEEP_SEC)
-            cam.pan(pan_stop)
+            pantilthat.pan(pan_stop)
             time.sleep(0.8)  # wait a while to avoid image blur
             if CAMERA_ON:
                 camera.capture(filename)
-                print('At cam stop(%i, %i) Saved %s' %
+                print('At pantilthat stop(%i, %i) Saved %s' %
                       (pan_stop, tilt_stop, filename))
             else:
-                print('Move to cam stop(%i, %i)' % (pan_stop, tilt_stop))
+                print('Move to pantilthat stop(%i, %i)' % (pan_stop, tilt_stop))
         image_seq += 1
 
         print('Smooth Pan Right speed = %i' % SERVO_SPEED)
         for pan_pos in range(SERVO_PAN_MIN, SERVO_PAN_MAX, SERVO_SPEED):
-            cam.pan(pan_pos)
+            pantilthat.pan(pan_pos)
             time.sleep(SERVO_SLEEP_SEC)
 
         print('Smooth Pan Left speed = %i' % SERVO_SPEED)
         for pan_pos in range(SERVO_PAN_MAX, SERVO_PAN_MIN, -SERVO_SPEED):
-            cam.pan(pan_pos)
+            pantilthat.pan(pan_pos)
             time.sleep(SERVO_SLEEP_SEC)
 
         center(SERVO_PAN_CENTER, SERVO_TILT_CENTER)
-        print("Tilt Max Down cam.tilt(%i)" % SERVO_TILT_MAX)
-        cam.tilt(SERVO_TILT_MAX)
+        print("Tilt Max Down pantilthat.tilt(%i)" % SERVO_TILT_MAX)
+        pantilthat.tilt(SERVO_TILT_MAX)
         time.sleep(2)
-        print("Tilt Max Up cam.tilt(%i)" % SERVO_TILT_MIN)
-        cam.tilt(SERVO_TILT_MIN)
+        print("Tilt Max Up pantilthat.tilt(%i)" % SERVO_TILT_MIN)
+        pantilthat.tilt(SERVO_TILT_MIN)
         time.sleep(2)
 
         print('Smooth Pan Down speed = %i' % SERVO_SPEED)
         for tilt_pos in range(SERVO_TILT_MIN, SERVO_TILT_MAX, SERVO_SPEED):
-            cam.tilt(tilt_pos)
+            pantilthat.tilt(tilt_pos)
             time.sleep(SERVO_SLEEP_SEC)
         print('Smooth Pan Up speed = %i' % SERVO_SPEED)
         for tilt_pos in range(SERVO_TILT_MAX, SERVO_TILT_MIN, -SERVO_SPEED):
-            cam.tilt(tilt_pos)
+            pantilthat.tilt(tilt_pos)
             time.sleep(SERVO_SLEEP_SEC)
         center(SERVO_PAN_CENTER, SERVO_TILT_CENTER)
 
@@ -176,9 +201,10 @@ try:
 
 except KeyboardInterrupt:
     print('')
-    print('----- End Demo -----')
+    print('----- End %s Demo -----' % pantilt_is)
     center(SERVO_PAN_CENTER, SERVO_TILT_CENTER)
     print('\n%s ver %s User Exited with Keyboard ctrl-c\n' % (PROG_NAME, PROG_VER))
-    cam.help()
-    cam.stop()
+    if not PANTILT_IS_PIMORONI:
+        pantilthat.help()
+        pantilthat.stop()
     sys.exit()
