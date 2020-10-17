@@ -32,7 +32,7 @@ class PanTilt:
   __ALLLED_OFF_H       = 0xFD
 
   def __init__(self, address=0x40, debug=False):
-    self.prog_ver = '0.6'
+    self.prog_ver = '0.7'
     self.pan_servo = 0  # pan servo
     self.tilt_servo = 1  # tilt servo
     self.flip_servo = False  # Do Not Flip Pan and Tilt
@@ -147,19 +147,20 @@ class PanTilt:
     print('Modified by Claude Pageau based on original driver at https://github.com/waveshare/Pan-Tilt-HAT')
     print('This driver uses BCM2835 For Details See http://www.airspayce.com/mikem/bcm2835/\n')
     print('Implementation Example\n')
-    print('   from pantilthat import PanTilt # import library')
-    print('   cam = PanTilt()     # Initialize pantilt servo library')
-    print('   cam.pan(0)    # valid values -90 to +90 Move cam horizontally to center position')
-    print('   cam.tilt(20)  # valid values -90 to +90 Move cam vertically to slightly above center\n')
+    print('   from waveshare.pantilthat import PanTilt # import library')
+    print('   pantilthat = PanTilt() # Initialize pantilt servo library')
+    print('   pantilthat.pan(0)      # valid values -90 to +90 Move pan servo horizontally to center position')
+    print('   pantilthat.tilt(20)    # valid values -90 to +90 Move tilt servo vertically to slightly above center\n')
     print('Other Options\n')
-    print('   cam.__version__()   # Display version Number')
-    print('   cam.setPWMFreq(50)  # Optional pwm frequency setting')
-    print('   cam.setServoPulse(1, 500)  # Optional pwm servo pulse setting')
-    print('   cam.debug = True        # Display additional servo information messages')
-    print('   cam.flip_servo = False  # Optionally flips pan and tilt in case servo plugin is different')
-    print('   cam.stop()   # Turn Off pwm to both servo channels')
-    print('   cam.start()  # Turn On pwm to both servo channels after stop')
-    print('   cam.help()   # Display this help message')
+    print('   pantilthat.__version__()   # Display version Number')
+    print('   pantilthat.setPWMFreq(50)  # Optional pwm frequency setting')
+    print('   pantilthat.setServoPulse(1, 500)  # Optional pwm servo pulse setting')
+    print('   pantilthat.debug = True        # Display additional servo information messages')
+    print('   pantilthat.flip_servo = False  # Optionally flips pan and tilt in case servo plugin is different')
+    print('   pantilthat.stop()   # Turn Off pwm to both servo channels')
+    print('   pantilthat.start()  # Turn On pwm to both servo channels after stop')
+    print('   pantilthat.help()   # Display this help message')
+    print('Note: currently there is no timeout similar to Pimoroni')
     print('Bye ...')
 
   def __version__(self):

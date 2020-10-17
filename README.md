@@ -81,22 +81,23 @@ Example using python interactive session.
 ctrl-d to exit
 
 ```
-Implementation Example
-
-   from pantilthat import PanTilt # import library
-   cam = PanTilt()                # Initialize pantilt servo library
-   cam.setPWMFreq(50)             # Default=50 Optional pwm frequency setting
-   cam.setServoPulse(1, 500)      # Optional pwm servo pulse setting
-   cam.pan(0)                     # valid values -90 to +90 Move cam horizontally to center position
-   cam.tilt(20)                   # valid values -90 to +90 Move cam vertically to slightly above center
-
-Other Options
-
-   cam.__version__()       # Display version Number
-   cam.debug = False       # True= Display additional servo information messages
-   cam.flip_servo = False  # True= Optionally flips pan and tilt in case servo plugin is different
-   cam.stop()              # Turn Off pwm to both servo channels
-   cam.start()             # Turn On pwm to both servo channels after stop
-   cam.help()              # Display this help message
-
+    pantilthat.py Driver for waveshare pan tilt hat hardware.
+    Modified by Claude Pageau based on original driver at https://github.com/waveshare/Pan-Tilt-HAT
+    This driver uses BCM2835 For Details See http://www.airspayce.com/mikem/bcm2835/
+    Implementation Example
+       from waveshare.pantilthat import PanTilt # import library
+       pantilthat = PanTilt() # Initialize pantilt servo library
+       pantilthat.pan(0)      # valid values -90 to +90 Move pan servo horizontally to center position
+       pantilthat.tilt(20)    # valid values -90 to +90 Move tilt servo vertically to slightly above center
+    Other Options
+       pantilthat.__version__()   # Display version Number
+       pantilthat.setPWMFreq(50)  # Optional pwm frequency setting
+       pantilthat.setServoPulse(1, 500)  # Optional pwm servo pulse setting
+       pantilthat.debug = True        # Display additional servo information messages
+       pantilthat.flip_servo = False  # Optionally flips pan and tilt in case servo plugin is different
+       pantilthat.stop()   # Turn Off pwm to both servo channels
+       pantilthat.start()  # Turn On pwm to both servo channels after stop
+       pantilthat.help()   # Display this help message
+    Note: currently there is no timeout similar to Pimoroni
+    Bye ...
 ```
