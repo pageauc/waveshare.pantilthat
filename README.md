@@ -23,7 +23,7 @@ NOTE: Do a Raspberry Pi OS ***sudo apt-get update*** and ***sudo apt-get upgrade
 
 This will create a /home/pi/waveshare folder and required files for testing the waveshare pantilt hardware
  
-Install Waveshare pantilthat python library and pwm driver Only
+curl command below will just install Waveshare python pantilthat library and driver.
 
     curl -L https://raw.githubusercontent.com/pageauc/waveshare.pantilthat/main/install-driver.sh | bash 
     
