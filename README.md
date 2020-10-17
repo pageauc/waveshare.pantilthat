@@ -88,7 +88,7 @@ ctrl-d to exit
        from waveshare.pantilthat import PanTilt # import library
        pantilthat = PanTilt() # Initialize pantilt servo library
        pantilthat.pan(0)      # valid values -90 to +90 Move pan servo horizontally to center position
-       pantilthat.tilt(20)    # valid values -90 to +90 Move tilt servo vertically to slightly above center
+       pantilthat.tilt(-10)    # valid values -90 to +90 Move tilt servo vertically to slightly above center
     Other Options
        pantilthat.__version__()   # Display version Number
        pantilthat.setPWMFreq(50)  # Optional pwm frequency setting
