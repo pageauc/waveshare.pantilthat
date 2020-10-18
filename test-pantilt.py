@@ -200,11 +200,12 @@ try:
         run_demo()
 
 except KeyboardInterrupt:
-    print('')
-    print('----- End %s Demo -----' % pantilt_is)
+    print('\n----- End %s Demo -----' % pantilt_is)
+    print('%s ver %s User Exited with Keyboard ctrl-c\n' % (PROG_NAME, PROG_VER))
     center(SERVO_PAN_CENTER, SERVO_TILT_CENTER)
-    print('\n%s ver %s User Exited with Keyboard ctrl-c\n' % (PROG_NAME, PROG_VER))
     if not PANTILT_IS_PIMORONI:
         pantilthat.help()
         pantilthat.stop()
+        time.sleep(2)
+    print('Bye ...')
     sys.exit()

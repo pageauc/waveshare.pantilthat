@@ -81,10 +81,13 @@ try:
            pantilt_is)
     dance()
 except KeyboardInterrupt:
+    print('\nUser Pressed ctrl-c')
     pantilthat.pan(PAN_HOME)
     pantilthat.tilt(TILT_HOME)
-    time.sleep(1)  # Short delay to move servos
-    print('\nUser Pressed ctrl-c')
     print('Position of PanTilt is (%i, %i)' % (PAN_HOME, TILT_HOME))
+    if not PANTILT_IS_PIMORONI:
+        pantilthat.stop()
+        time.sleep(2)  # Short delay allow servos to shutdown
     print('End %s PanTiltHat SinWave Dance' % pantilt_is)
+    print('Bye ...')
     print('Bye ...')
