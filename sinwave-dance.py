@@ -56,26 +56,25 @@ else:
     pantilt_is = 'Waveshare'
 
 def dance():
-  while True:
-      # Get the time in seconds
-      t = time.time()
+    while True:
+        # Get the time in seconds
+        t = time.time()
 
-      # G enerate an angle using a sine wave (-1 to 1) multiplied by 90 (-90 to 90)
-      a = math.sin(t * 2) * 90
+        # G enerate an angle using a sine wave (-1 to 1) multiplied by 90 (-90 to 90)
+        a = math.sin(t * 2) * 90
 
-      # Cast a to int for v0.0.2
-      a = int(a)
+        # Cast a to int for v0.0.2
+        a = int(a)
 
-      pantilthat.pan(a)
-      pantilthat.tilt(a)
+        pantilthat.pan(a)
+        pantilthat.tilt(a)
 
-      # Two decimal places is quite enough!
-      if VERBOSE_ON:
-          print(round(a, 2))
+        # Two decimal places is quite enough!
+        if VERBOSE_ON:
+            print(round(a, 2))
 
-      # Sleep for a bit so we're not hammering the HAT with updates
-      time.sleep(SPEED)
-
+        # Sleep for a bit so we're not hammering the HAT with updates
+        time.sleep(SPEED)
 try:
     print('Start %s PanTiltHat SinWave Dance Ctrl-c to Exit' %
            pantilt_is)
@@ -90,4 +89,4 @@ except KeyboardInterrupt:
         time.sleep(2)  # Short delay allow servos to shutdown
     print('End %s PanTiltHat SinWave Dance' % pantilt_is)
     print('Bye ...')
-    print('Bye ...')
+    sys.exit()
