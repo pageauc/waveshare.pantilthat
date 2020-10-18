@@ -83,6 +83,7 @@ except KeyboardInterrupt:
     print('\nUser Pressed ctrl-c')
     pantilthat.pan(PAN_HOME)
     pantilthat.tilt(TILT_HOME)
+    time.sleep(0.1)  # Allow Time for servos to move
     print('Position of PanTilt is (%i, %i)' % (PAN_HOME, TILT_HOME))
     if not PANTILT_IS_PIMORONI:
         pantilthat.stop()

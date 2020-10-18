@@ -207,5 +207,4 @@ except KeyboardInterrupt:
         pantilthat.help()
         pantilthat.stop()
         time.sleep(2)
-    print('Bye ...')
     sys.exit()
