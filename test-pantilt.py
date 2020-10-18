@@ -50,8 +50,8 @@ if CAMERA_ON:
     try:
         import picamera
     except ImportError:
-        print('ERROR: Could Not import picamera library')
-        print('import per commands below\n')
+        print('ERROR: Could Not import picamera python library')
+        print('Install python libraries per commands below\n')
         print('sudo apt-get install python-picamera')
         print('sudo apt-get install python3-picamera')
         sys.exit(1)
