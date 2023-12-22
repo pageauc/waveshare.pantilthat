@@ -17,7 +17,7 @@ echo "Install Python 2 and 3 Dependencies"
 sudo apt-get -yq install python-rpi.gpio
 sudo apt-get -yq install python3-rpi.gpio
 
-bcm_ver='68'
+bcm_ver='73'
 echo "$0 Install bcm2835-1.$bcm_ver  Please wait ..."
 echo "$0 Downloading http://www.airspayce.com/mikem/bcm2835/bcm2835-1.$bcm_ver.tar.gz"
 wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.$bcm_ver.tar.gz
