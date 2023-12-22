@@ -54,7 +54,7 @@ Valid pan and tilt values are between -90 to +90 degrees
     #!/usr/bin/env python
     import time
     import RPi.GPIO as GPIO
-    from waveshare.pantilthat import PanTilt
+    from pantilthat import PanTilt
     pantilthat = PanTilt()
     
     pantilthat.pan(0)
