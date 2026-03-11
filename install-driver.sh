@@ -15,6 +15,7 @@ rm pantilthat.py
 echo "Install Python 3 Dependencies"
 sudo apt-get -yq install python3-rpi.gpio
 
+echo "
 -----------------------------------------------
 Install Complete
 -----------------------------------------------

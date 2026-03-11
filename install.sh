@@ -55,6 +55,7 @@ sudo apt-get -yq install python3-rpi.gpio
 sudo apt-get -yq install python-picamera
 sudo apt-get -yq install python3-picamera
 
+echo "
 -----------------------------------------------
 $STATUS Complete
 -----------------------------------------------
