@@ -32,7 +32,7 @@ class PanTilt:
   __ALLLED_OFF_H       = 0xFD
 
   def __init__(self, address=0x40, debug=False):
-    self.prog_ver = '0.7'
+    self.prog_ver = '0.5'
     self.pan_servo = 0  # pan servo
     self.tilt_servo = 1  # tilt servo
     self.flip_servo = False  # Do Not Flip Pan and Tilt
