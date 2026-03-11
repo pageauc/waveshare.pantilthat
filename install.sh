@@ -50,9 +50,7 @@ sudo touch /usr/local/lib/$PYTHON_VERSION/dist-packages/waveshare/__init__.py
 rm pantilthat.py
 
 echo "$STATUS Install Dependencies"
-sudo apt-get -yq install python-rpi.gpio
 sudo apt-get -yq install python3-rpi.gpio
-sudo apt-get -yq install python-picamera
 sudo apt-get -yq install python3-picamera
 
 echo "
