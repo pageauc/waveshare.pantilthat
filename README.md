@@ -25,7 +25,8 @@ NOTE: Do a Raspberry Pi OS ***sudo apt-get update*** and ***sudo apt-get upgrade
 
 This will create a /home/pi/waveshare folder and required files for testing the waveshare pantilt hardware
  
-curl command below will just install Waveshare python pantilthat library and driver.
+curl command below will just install Waveshare python pantilthat library and driver so you can use on other projects.
+This only needs to be done once.
 
     curl -L https://raw.githubusercontent.com/pageauc/waveshare.pantilthat/main/install-driver.sh | bash 
     
@@ -62,43 +63,13 @@ Note Code is compatible with Pimoroni and Waveshare pantilthats under python2 or
 
     python ./sinwave-dance.py   
 
-Review test-pantilt.py code for implementation details. Code is python2 and python3 compatible.    
+Review test-pantilt.py code for implementation details.   
 Make a copy and try changing code to learn details of managing pantilt software control.
 
     cd ~/waveshare
-    cp test-pantilt.py test-myproject.py
-    nano test-myproject.py
+    cp test-pantilt.py myproject.py
+    nano myproject.py
 
-### pantilthat.py help() 
-Below is a copy of the pantilthat.py help() function output.       
-Example using python interactive session.
 
-    cd ~/waveshare
-    python
-    from waveshare.pantilthat import PanTilt   # Load from python library dist-packages
-    mypantilt = PanTilt()
-    mypantilt.help()
 
-ctrl-d to exit
-
-```
-    pantilthat.py Driver for waveshare pan tilt hat hardware.
-    Modified by Claude Pageau based on original driver at https://github.com/waveshare/Pan-Tilt-HAT
-    This driver uses BCM2835 For Details See http://www.airspayce.com/mikem/bcm2835/
-    Implementation Example
-       from waveshare.pantilthat import PanTilt # import library
-       pantilthat = PanTilt() # Initialize pantilt servo library
-       pantilthat.pan(0)      # valid values -90 to +90 Move pan servo horizontally to center position
-       pantilthat.tilt(-10)   # valid values -90 to +90 Move tilt servo vertically to slightly above center
-    Other Options
-       pantilthat.__version__()   # Display version Number
-       pantilthat.setPWMFreq(50)  # Optional pwm frequency setting
-       pantilthat.setServoPulse(1, 500)  # Optional pwm servo pulse setting
-       pantilthat.debug = True        # Display additional servo information messages
-       pantilthat.flip_servo = False  # Optionally flips pan and tilt in case servo plugin is different
-       pantilthat.stop()   # Turn Off pwm to both servo channels
-       pantilthat.start()  # Turn On pwm to both servo channels after stop
-       pantilthat.help()   # Display this help message
-    Note: currently there is no timeout similar to Pimoroni
-    Bye ...
-```
+    
