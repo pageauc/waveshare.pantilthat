@@ -44,8 +44,8 @@ else:
         sys.exit()
     try:
         pantilthat = PanTilt()
-        pantilt.setPWMFreq(50)
-    #pantilt.setServoPulse
+        pantilthat.setPWMFreq(50)
+        #pantilt.setServoPulse
         pantilthat.pan(PAN_HOME)
     except IOError:
         print('ERROR: pantilthat hardware problem')
