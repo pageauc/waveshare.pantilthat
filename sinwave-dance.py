@@ -22,8 +22,7 @@ if PANTILT_IS_PIMORONI:
     try:
         import pantilthat
     except ImportError:
-        print('ERROR : Import Pimoroni PanTiltHat Python Library per')
-        print('        sudo apt install pantilthat')
+        print('ERROR : You need to install Pimoroni PanTiltHat Python Library')
         sys.exit()
     try:
         pantilthat.pan(PAN_HOME)
@@ -40,11 +39,13 @@ else:
         # import pantilthat
         from waveshare.pantilthat import PanTilt
     except ImportError:
-        print('ERROR : Install Waveshare PanTiltHat Python Library per')
+        print('ERROR : You need to Install Waveshare PanTiltHat Python Library per')
         print('        curl -L https://raw.githubusercontent.com/pageauc/waveshare.pantilthat/main/install.sh | bash')
         sys.exit()
     try:
         pantilthat = PanTilt()
+        pantilt.setPWMFreq(50)
+    #pantilt.setServoPulse
         pantilthat.pan(PAN_HOME)
     except IOError:
         print('ERROR: pantilthat hardware problem')

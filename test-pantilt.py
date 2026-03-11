@@ -83,6 +83,7 @@ else:
         sys.exit()
     try:
         pantilthat = PanTilt()
+        pantilthat.setPWMFreq(50)
         pantilthat.pan(SERVO_PAN_CENTER)
     except IOError:
         print('ERROR: pantilthat hardware problem')
