@@ -43,13 +43,10 @@ done
 
 chmod +x *py
 
-# create python library module folders for python2 and python3
-sudo mkdir -p /usr/local/lib/python2.7/dist-packages/waveshare
-sudo cp pantilthat.py /usr/local/lib/python2.7/dist-packages/waveshare
-sudo touch /usr/local/lib/python2.7/dist-packages/waveshare/__init__.py
-sudo mkdir -p /usr/local/lib/python3.7/dist-packages/waveshare
-sudo cp pantilthat.py /usr/local/lib/python3.7/dist-packages/waveshare
-sudo touch /usr/local/lib/python3.7/dist-packages/waveshare/__init__.py
+PYTHON_VERSION=$(python3 -c "import sys; print(f'python{sys.version_info.major}.{sys.version_info.minor}')")
+sudo mkdir -p /usr/local/lib/$PYTHON_VERSION/dist-packages/waveshare
+sudo cp pantilthat.py /usr/local/lib/$PYTHON_VERSION/dist-packages/waveshare
+sudo touch /usr/local/lib/$PYTHON_VERSION/dist-packages/waveshare/__init__.py
 rm pantilthat.py
 
 echo "$STATUS Install Dependencies"
@@ -58,25 +55,6 @@ sudo apt-get -yq install python3-rpi.gpio
 sudo apt-get -yq install python-picamera
 sudo apt-get -yq install python3-picamera
 
-bcm_ver='68'
-cd ~
-echo "$0 Install bcm2835-1.$bcm_ver  Please wait ..."
-echo "$0 Downloading http://www.airspayce.com/mikem/bcm2835/bcm2835-1.$bcm_ver.tar.gz"
-wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.$bcm_ver.tar.gz
-tar -zxvf bcm2835-1.$bcm_ver.tar.gz
-cd bcm2835-1.$bcm_ver
-sudo ./configure
-echo "$0 Compiling ..... One Moment Please"
-sudo make
-sudo make check
-echo "$0 Running make install"
-sudo make install
-echo "$0 Performing Cleanup"
-cd ~
-rm bcm2835-1.$bcm_ver.tar.gz
-sudo rm -r  bcm2835-1.$bcm_ver
-echo "$0 Completed Install of bcm2835-1.$bcm_ver"
-echo "
 -----------------------------------------------
 $STATUS Complete
 -----------------------------------------------
