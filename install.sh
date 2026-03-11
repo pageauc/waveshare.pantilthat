@@ -27,7 +27,7 @@ echo "$STATUS Download GitHub Files"
 if $is_upgrade ; then
     installFiles=("pantilthat.py" "test-pantilt.py" "sinwave-dance.py")
 else
-    installFiles=("pantilthat.py" "test-pantilt.py" "sinwave-dance.py")
+    installFiles=("pantilthat.py" "test-pantilt.py" "sinwave-dance.py" "README.md")
 fi
 
 for fname in "${installFiles[@]}" ; do

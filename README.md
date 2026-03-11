@@ -8,7 +8,9 @@ I felt the [vendor instructions](https://www.waveshare.com/pan-tilt-hat.htm) and
 [GitHub Repo](https://github.com/waveshare/Pan-Tilt-HAT) were lacking, especially the python class library and sample code.
 I wrote my own python library that is similar to the Pimoroni pan tilt hat operation that uses -90 to +90 values for pan and tilt
 positioning. I also have several Pimoroni pan tilt hats and found support was much better and trouble free. 
-Hope this can help you with your own projects.  
+Hope this can help you with your own projects. 
+
+Note I have updated this repo and tested with RPI OS Bookworm on a RPI 2B.  Will do more testing as time allows 
 
 Instruction assume you are comfortable with SSH and/or Terminal operation and Raspberry Pi OS commands.
 
@@ -32,7 +34,6 @@ See script instructions for Details
 ## Instructions
  
 The ***pantilthat.py*** file is the python class library for waveshare pan tilt hat hardware.
-This driver uses BCM2835 and I2C. For Details See http://www.airspayce.com/mikem/bcm2835/
 
 You also need to ***enable I2C***    
 From a Logged in SSH or Terminal session on the Raspbery Pi. Run the
@@ -44,7 +45,7 @@ Select ***5 Interfacing Options*** menu pick
 Select ***P5 I2C*** and Enable automatic loading of I2C kernel module
 
 If you have a Pi camera module installed        
-Select ***Pi Camera*** and Enable connection to Pi Camera   
+Select ***Pi Camera*** and Enable connection to Pi Camera Legacy   
 
 ***NOTE:*** The test-pantilt.py demo defaults to CAMERA_ON = False
 To enable use of a Pi Camera edit test-pantilt.py and set variable CAMERA_ON = True
