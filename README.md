@@ -114,15 +114,15 @@ After installation, explore these scripts in the ~/waveshare folder:
 
 ### Script Description
 
-    test-pantilt.py	Interactive menu to manually test pan, tilt, and camera functions.
+* test-pantilt.py	Interactive menu to manually test pan, tilt, and camera functions.
 
-    sinwave-dance.py	Makes the servos perform a smooth, mesmerizing sine wave dance.
+* sinwave-dance.py	Makes the servos perform a smooth, mesmerizing sine wave dance.
 
-    diagnostic.py	A utility to check I2C, permissions, and hardware detection. Run with python3 diagnostic.py.
+* diagnostic.py	A utility to check I2C, permissions, and hardware detection. Run with python3 diagnostic.py.
 
 ## Detailed Documentation
 For a deeper dive into the driver's functions, hardware-specific notes, and troubleshooting tips,
-please see the included waveshare.txt file in the repository. It contains the complete help text from the driver.
+please see the included [waveshare.txt](./waveshare.txt) file in the repository. It contains the complete help text from the driver.
 
 ## Contributing & Support
 Found a bug? Please open an issue on GitHub.
