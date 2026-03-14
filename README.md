@@ -1,6 +1,3 @@
-📄 README.md (Unified Driver Version)
-This updates your main GitHub README to highlight the new auto-detection feature.
-
 # waveshare.pantilthat
 ### Unified Python Library for Waveshare & Pimoroni Pan-Tilt HATs on Raspberry Pi
 
