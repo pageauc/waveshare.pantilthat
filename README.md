@@ -20,7 +20,8 @@ I initially created this for the Waveshare HAT due to limited vendor support, dr
 
 ### Step 1: Install the driver and demos with a single command:
 
-copy appropriate curl command by pressing the github copy icon on right of code box then paste into SSH or terminal session on RPI
+Copy the appropriate curl command by pressing the github copy icon on right of code box
+then paste into SSH or terminal session on RPI. Press Enter to execute bash script.
 
 install.sh creates a ~/waveshare folder with all necessary Unified python librsry files, Demo and information files.
 
