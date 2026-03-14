@@ -1,0 +1,171 @@
+
+### waveshare.txt` (Detailed Driver Help)
+
+This file serves as the expanded help text, explaining the new unified driver in detail.
+
+==================================================
+Unified PanTilt HAT Driver - Detailed Help
+==================================================
+
+This driver provides a unified interface for controlling both
+Waveshare Pan-Tilt HATs and Pimoroni Pan-Tilt HATs on a Raspberry Pi.
+It automatically detects which hardware is connected.
+
+Version: 0.9 (as implemented in pantilthat.py)
+
+==================================================
+1. QUICK START
+==================================================
+
+The simplest way to use the driver is:
+
+    from waveshare.pantilthat import PanTiltController
+
+    # This single line auto-detects your hardware!
+    pt = PanTiltController()
+
+    # Control your servos with values from -90 to +90
+    pt.pan(45)   # Move pan 45 degrees right
+    pt.tilt(-30) # Move tilt 30 degrees up (assuming up is negative)
+    pt.pan(0)    # Center the pan servo
+    pt.tilt(0)   # Center the tilt servo
+
+==================================================
+2. HARDWARE AUTO-DETECTION
+==================================================
+
+The driver intelligently selects the correct backend:
+
+1.  **Pimoroni Check:** It first attempts to import the standard
+    `pantilthat` library. If found and communication succeeds, it uses
+    the Pimoroni hardware.
+2.  **Waveshare Fallback:** If the Pimoroni library is not found or
+    fails to communicate, it attempts to initialize the Waveshare HAT
+    via the I2C bus (smbus).
+
+This happens automatically when you create a `PanTiltController`
+instance. You can also query the status manually:
+
+    from waveshare.pantilthat import get_hardware_info, is_available
+
+    if is_available():
+        info = get_hardware_info()
+        print(f"Hardware: {info['type']} - {info['status']}")
+    else:
+        print("No compatible HAT found.")
+
+==================================================
+3. CORE API REFERENCE
+==================================================
+
+The `PanTiltController` instance (`pt` in examples) provides the
+following primary methods:
+
+--- pan(angle) ---
+    Moves the pan (horizontal) servo.
+    Args: angle (int) - Value between -90 and +90.
+          -90 = far left, 0 = center, +90 = far right.
+
+--- tilt(angle) ---
+    Moves the tilt (vertical) servo.
+    Args: angle (int) - Value between -90 and +90.
+          Note: The physical direction (up/down) depends on servo
+                mounting. Typically, -90 = up, 0 = center, +90 = down.
+
+--- start() ---
+    (Waveshare only) Starts PWM output if it was previously stopped.
+    On Pimoroni, this method does nothing but is safe to call.
+
+--- stop() ---
+    (Waveshare only) Stops PWM output to the servos, which can save
+    power and reduce servo jitter. On Pimoroni, it attempts to disable
+    the servos if the underlying library supports it.
+
+--- help() ---
+    Prints this detailed help information.
+
+--- __version__() ---
+    Returns the driver version string.
+
+==================================================
+4. WAVESHARE-SPECIFIC CONFIGURATION
+==================================================
+
+If the driver detects a Waveshare HAT, the returned object has
+additional configurable attributes. These settings are ignored when a
+Pimoroni HAT is used.
+
+--- pt.flip_servo ---
+    Type: bool, Default: False
+    If True, the pan and tilt servo channels are swapped. This is
+    useful if you have plugged the servos into the wrong headers on
+    the HAT.
+
+--- pt.debug ---
+    Type: bool, Default: False (settable via PanTiltController(debug=True))
+    If True, detailed I2C communication messages are printed to the
+    console. Helpful for troubleshooting.
+
+--- pt.setPWMFreq(freq) ---
+    Args: freq (int) - PWM frequency in Hz, Default: 50
+    Sets the PWM frequency for the servo control. The standard for
+    most servos is 50Hz. Change this only if you know what you are
+    doing.
+
+--- pt.setServoPulse(channel, pulse) ---
+    Low-level method to set a raw pulse width. Generally, you should
+    use `pan()` and `tilt()` instead.
+
+==================================================
+5. TROUBLESHOOTING & DIAGNOSTICS
+==================================================
+
+If your HAT is not detected or working, run the included diagnostic
+tool:
+
+    cd ~/waveshare
+    python3 diagnostic.py
+
+This script will check:
+    - I2C is enabled in raspi-config.
+    - Your user has permission to access /dev/i2c-*.
+    - I2C devices are present on the bus (looking for address 0x40).
+    - The Pimoroni library is installed and functional.
+    - The Waveshare driver can communicate.
+
+**Common Issues & Solutions:**
+
+*   **"I2C device not found" / "Failed to write byte"**
+    *   Ensure I2C is enabled: `sudo raspi-config` -> Interface Options -> I2C -> Enable. Reboot.
+    *   Check your user is in the `i2c` group: `groups $USER`. If not, add with `sudo usermod -a -G i2c $USER` and log out/in.
+    *   Verify the HAT is properly seated and connected.
+
+*   **"Pimoroni hardware not responding" but library is found**
+    *   This can happen with permission issues on Bookworm. Try running the script with `sudo python3 your_script.py` as a temporary test. For a permanent fix, ensure your user is in the `i2c` group.
+    *   If you installed Pimoroni via `pip` on Bookworm, you must use a Python virtual environment.
+
+*   **Servos jitter or don't move smoothly**
+    *   Ensure you have a good external power supply for the servos. The Raspberry Pi's 5V pin cannot always provide enough current for two servos moving simultaneously.
+    *   For Waveshare, you can try calling `pt.stop()` when the servos are idle to reduce electrical noise.
+
+==================================================
+6. BACKWARD COMPATIBILITY
+==================================================
+
+For users of the original, Waveshare-only driver, the old class name
+`PanTilt` is still available as a deprecated alias for
+`PanTiltController`. It is recommended to update your code to use the
+new name for clarity.
+
+    # Old way (still works, but gives a warning)
+    from waveshare.pantilthat import PanTilt
+    pt = PanTilt()
+
+    # New recommended way
+    from waveshare.pantilthat import PanTiltController
+    pt = PanTiltController()
+
+==================================================
+For more information, updates, or to report issues, please visit:
+https://github.com/pageauc/waveshare.pantilthat
+==================================================

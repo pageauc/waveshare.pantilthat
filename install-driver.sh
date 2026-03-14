@@ -4,7 +4,7 @@ cd ~
 echo "Installing Waveshare python libraries and PWM driver"
 wget -O pantilthat.py https://raw.githubusercontent.com/pageauc/waveshare.pantilthat/main/pantilthat.py
 
-# create python library module folders for python2 and python3
+# create python library module folders for python3
 
 PYTHON_VERSION=$(python3 -c "import sys; print(f'python{sys.version_info.major}.{sys.version_info.minor}')")
 sudo mkdir -p /usr/local/lib/$PYTHON_VERSION/dist-packages/waveshare
@@ -17,7 +17,7 @@ sudo apt-get -yq install python3-rpi.gpio
 
 echo "
 -----------------------------------------------
-Install Complete
+Waveshare Pantilthat driver Install Complete
 -----------------------------------------------
 INSTRUCTIONS Assumes you are comfortable with SSH and/or Terminal session commands
 
@@ -32,20 +32,21 @@ Optionally you can Enable Pi Camera module support (legacy).
 Example python script to center pantilthat.
 Valid pan and tilt values are between -90 to +90 degrees
 
-    #!/usr/bin/env python
-    import time
-    import RPi.GPIO as GPIO
-    from waveshare import PanTilt
-    pantilthat = PanTilt()
-    pantilthat.setPWMFreq(50)   
-    # center pantilt
-    pantilthat.pan(0)
-    pantilthat.tilt(0)
-    time.sleep(0.1) # allow time for servo movement
-    pantilthat.stop()
-    time.sleep(2) # Allow time for driver to stop
-    print('pantilthat centered at pan=0, tilt=0')
-    print('Bye ...')
+    python3
+    from waveshare.pantilthat import PanTiltController
+
+    # Auto-detects your hardware (Waveshare or Pimoroni)
+    pt = PanTiltController()
+
+    # Center the servos
+    pt.pan(0)
+    pt.tilt(0)
+
+    # Move pan 45 degrees right, tilt 30 degrees up
+    pt.pan(45)
+    pt.tilt(-30)  # Note: Up is often negative
+
+for more examples and Documentation see https://github.com/pageauc/waveshare.pantilthat
 
 Good Luck Claude ...
 Bye"

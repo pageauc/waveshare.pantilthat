@@ -1,75 +1,131 @@
+📄 README.md (Unified Driver Version)
+This updates your main GitHub README to highlight the new auto-detection feature.
+
 # waveshare.pantilthat
-#### WaveShare pan tilt hat python library class and demo for Raspberry Pi
+### Unified Python Library for Waveshare & Pimoroni Pan-Tilt HATs on Raspberry Pi
 
-I [bought](https://www.amazon.com/waveshare-Pan-Tilt-Raspberry-Onboard-Intensity/dp/B07Q5W6P3N/ref=sr_1_1?dchild=1&keywords=waveshare+pan+tilt&qid=1601992264&sr=8-1) 
-the waveshare pan tilt hat for a Raspberry Pi project I was working on.
-I found Assembly tricky but with the help of a [YouTube video](https://www.youtube.com/watch?v=4A7tJ0QH4L4) I got it together.
-I felt the [vendor instructions](https://www.waveshare.com/pan-tilt-hat.htm) and 
-[GitHub Repo](https://github.com/waveshare/Pan-Tilt-HAT) were lacking, especially the python class library and sample code.
-I wrote my own python library that is similar to the Pimoroni pan tilt hat operation that uses -90 to +90 values for pan and tilt
-positioning. I also have several Pimoroni pan tilt hats and found support was much better and trouble free. 
-Hope this can help you with your own projects. 
+[![Join the chat at https://gitter.im/waveshare-pantilthat/community](https://badges.gitter.im/waveshare-pantilthat/community.svg)](https://gitter.im/waveshare-pantilthat/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Note I have updated this repo and tested with RPI OS Bookworm on a RPI 2B.  Will do more testing as time allows 
+This repository provides a **unified Python driver** for both **Waveshare Pan-Tilt HAT** and **Pimoroni Pan-Tilt HAT** hardware. The driver automatically detects which HAT is connected, offering a single, simple interface for your projects.
 
-Instruction assume you are comfortable with SSH and/or Terminal operation and Raspberry Pi OS commands.
+I initially created this for the Waveshare HAT due to limited vendor support, drawing inspiration from the excellent Pimoroni library. Now, it seamlessly supports both!
 
-## Quick Install
+**Key Features:**
+*   **Auto-Detection:** One import, one interface. Works with Waveshare *or* Pimoroni hardware without code changes.
+*   **Simple API:** Uses intuitive `pan(angle)` and `tilt(angle)` commands with values from `-90` to `+90` (0 = center).
+*   **Cross-Platform:** Tested on Raspberry Pi OS (including Bookworm) with Python 3.
+*   **Demos Included:** Get started quickly with example scripts.
 
-NOTE: Do a Raspberry Pi OS ***sudo apt-get update*** and ***sudo apt-get upgrade*** before curl install.
 
-***Step 1*** With mouse left button, highlight curl command below. Right click mouse in highlighted area and Copy.    
-***Step 2*** On RPI putty SSH or terminal session right click, select paste then Enter to download and run script.
+## 🚀 Quick Install (Recommended)
+
+**Prerequisite:** Ensure your system is updated.
+
+    sudo apt-get update && sudo apt-get upgrade -y
+
+### Step 1: Install the driver and demos with a single command:
 
     curl -L https://raw.githubusercontent.com/pageauc/waveshare.pantilthat/main/install.sh | bash
 
-This will create a /home/pi/waveshare folder and required files for testing the waveshare pantilt hardware
- 
-curl command below will just install Waveshare python pantilthat library and driver so you can use on other projects.
-This only needs to be done once.
+This creates a ~/waveshare folder with all necessary files plus the waveshare.pantilthat.py library.
 
-    curl -L https://raw.githubusercontent.com/pageauc/waveshare.pantilthat/main/install-driver.sh | bash 
-    
-See script instructions for Details    
- 
-## Instructions
- 
-The ***pantilthat.py*** file is the python class library for waveshare pan tilt hat hardware.
-
-You also need to ***enable I2C***    
-From a Logged in SSH or Terminal session on the Raspbery Pi. Run the
-Raspberry PI configuration whiptail menu per command below
+### Step 2: Enable I2C (if not already done):
 
     sudo raspi-config
-    
-Select ***5 Interfacing Options*** menu pick            
-Select ***P5 I2C*** and Enable automatic loading of I2C kernel module
 
-If you have a Pi camera module installed        
-Select ***Pi Camera*** and Enable connection to Pi Camera Legacy   
+Navigate to Interface Options -> I2C -> Enable. Reboot your Pi.
 
-***NOTE:*** The test-pantilt.py demo defaults to CAMERA_ON = False
-To enable use of a Pi Camera edit test-pantilt.py and set variable CAMERA_ON = True
- 
-Reboot and run the example ***test-pantilt.py*** demo python script per.
+### Step 3: Run a demo!
 
     cd ~/waveshare
-    python ./test-pantilt.py
+    python3 sinewave-dance.py
 
-Press ctrl-c to exit script.  
+The script will auto-detect your HAT and start a smooth sine wave movement. Press Ctrl-C to exit.
 
-Get the pantilthat to dance. Adapted from the Pimoroni pantilthat Github repo example smooth.py    
-Note Code is compatible with Pimoroni and Waveshare pantilthats under python2 or python3.
+## Solutions for Pimoroni on Bookworm or later:
+### Option 1: Use the System Package (Recommended)
 
-    python ./sinwave-dance.py   
+    sudo apt install python3-pantilthat
 
-Review test-pantilt.py code for implementation details.   
-Make a copy and try changing code to learn details of managing pantilt software control.
+### Option 2: Create a Virtual Environment (Works with pip)
+    If you need to run your project in a python virtual envionment
 
     cd ~/waveshare
-    cp test-pantilt.py myproject.py
-    nano myproject.py
+    python3 -m venv pantilt-env --system-site-packages
 
+    # Activate it
+    source pantilt-env/bin/activate
 
+    # Installing Pimoroni pantilt using pip works inside the venv
+    pip install pantilthat
 
-    
+    # Run your script
+    python sinewave-dance.py
+
+To exit the python environment from within the env
+
+    deactivate
+
+## Usage Examples
+Using the unified driver is straightforward. Here's how you use it in your own projects after installation.
+
+### Basic Control
+
+    python3
+    from waveshare.pantilthat import PanTiltController
+
+    # Auto-detects your hardware (Waveshare or Pimoroni)
+    pt = PanTiltController()
+
+    # Center the servos
+    pt.pan(0)
+    pt.tilt(0)
+
+    # Move pan 45 degrees right, tilt 30 degrees up
+    pt.pan(45)
+    pt.tilt(-30)  # Note: Up is often negative
+
+### Advanced (Waveshare-Specific Settings)
+For Waveshare hardware, you can access additional configuration options.
+
+    python3
+    from waveshare.pantilthat import PanTiltController
+
+    pt = PanTiltController(debug=True)   # Enable debug messages
+    pt.flip_servo = True                 # Swap pan and tilt servos if needed
+    pt.setPWMFreq(50)                    # Adjust PWM frequency
+    # ... control pan/tilt as usual ...
+    pt.stop()                            # Turn off PWM output
+
+### Check Hardware Status
+
+    python3
+    from waveshare.pantilthat import get_hardware_info, is_available
+
+    if is_available():
+        info = get_hardware_info()
+        print(f"Detected: {info['type']} - {info['status']}")
+
+## Included Demo Scripts
+After installation, explore these scripts in the ~/waveshare folder:
+
+### Script Description
+
+    test-pantilt.py	Interactive menu to manually test pan, tilt, and camera functions.
+
+    sinwave-dance.py	Makes the servos perform a smooth, mesmerizing sine wave dance.
+
+    diagnostic.py	A utility to check I2C, permissions, and hardware detection. Run with python3 diagnostic.py.
+
+## Detailed Documentation
+For a deeper dive into the driver's functions, hardware-specific notes, and troubleshooting tips,
+please see the included waveshare.txt file in the repository. It contains the complete help text from the driver.
+
+## Contributing & Support
+Found a bug? Please open an issue on GitHub.
+
+Have a question? Join the Gitter community chat.
+
+Contributions via pull requests are welcome.
+
+Enjoy your Pan-Tilt projects!
