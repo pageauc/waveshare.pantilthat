@@ -1,8 +1,6 @@
 # waveshare.pantilthat
 ### Unified Python Library for Waveshare & Pimoroni Pan-Tilt HATs on Raspberry Pi
 
-[![Join the chat at https://gitter.im/waveshare-pantilthat/community](https://badges.gitter.im/waveshare-pantilthat/community.svg)](https://gitter.im/waveshare-pantilthat/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 This repository provides a **unified Python driver** for both **Waveshare Pan-Tilt HAT** and **Pimoroni Pan-Tilt HAT** hardware. The driver automatically detects which HAT is connected, offering a single, simple interface for your projects.
 
 I initially created this for the Waveshare HAT due to limited vendor support, drawing inspiration from the excellent Pimoroni library. Now, it seamlessly supports both!
@@ -22,9 +20,16 @@ I initially created this for the Waveshare HAT due to limited vendor support, dr
 
 ### Step 1: Install the driver and demos with a single command:
 
+copy appropriate curl command by pressing the github copy icon on right of code box then paste into SSH or terminal session on RPI
+
+install.sh creates a ~/waveshare folder with all necessary Unified python librsry files, Demo and information files.
+
     curl -L https://raw.githubusercontent.com/pageauc/waveshare.pantilthat/main/install.sh | bash
 
-This creates a ~/waveshare folder with all necessary files plus the waveshare.pantilthat.py library.
+install-driver.sh installs only the pantilthat Unified python3 library without demo files
+
+    curl -L https://raw.githubusercontent.com/pageauc/waveshare.pantilthat/main/install-driver.sh | bash	
+	
 
 ### Step 2: Enable I2C (if not already done):
 
