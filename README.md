@@ -18,12 +18,12 @@ I initially created this for the Waveshare HAT due to limited vendor support, dr
 
     sudo apt-get update && sudo apt-get upgrade -y
 
-### Step 1: Install the driver and demos with a single command:
+### Step 1: Install the driver and/or demos with a single command:
 
 Copy the appropriate curl command by pressing the github copy icon on right of code box
 then paste into SSH or terminal session on RPI. Press Enter to execute bash script.
 
-install.sh creates a ~/waveshare folder with all necessary Unified python librsry files, Demo and information files.
+install.sh creates a ~/waveshare folder with all necessary Unified python library files, Demo and information files.
 
     curl -L https://raw.githubusercontent.com/pageauc/waveshare.pantilthat/main/install.sh | bash
 
